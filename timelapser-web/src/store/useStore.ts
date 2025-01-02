@@ -9,7 +9,7 @@ interface AppState {
 }
 
 const useStore = create<AppState>((set) => ({
-    darkMode: false,
+    darkMode: true,
     toggleDarkMode: () => set((state) => ({ darkMode: !state.darkMode })),
     language: 'tr',
     toggleLanguage: () => set((state) => {

@@ -5,12 +5,17 @@
     "darkMode": "Switch to Dark Mode",
     "lightMode": "Switch to Light Mode",
     "language": "Language",
-    "photosSelected": "{count} photos selected",
+    "photosSelected": "{{count}} photos selected",
+    "upload": {
+        "dragDropText": "Drag and drop photos here or click to select",
+        "formatText": "JPG or PNG format",
+        "loading": "Loading photos..."
+    },
     "validationErrors": {
-        "minPhotos": "Please upload at least {min} photos",
-        "maxPhotos": "You can upload maximum {max} photos",
-        "invalidType": "\"{filename}\" has unsupported file format. Only JPG and PNG formats are accepted",
-        "fileTooBig": "\"{filename}\" is too large. Maximum file size is 5MB",
+        "minPhotos": "Please upload at least {{min}} photos",
+        "maxPhotos": "You can upload maximum {{max}} photos",
+        "invalidType": "\"{{filename}}\" has unsupported file format. Only JPG and PNG formats are accepted",
+        "fileTooBig": "\"{{filename}}\" is too large. Maximum file size is 5MB",
         "sequentialNames": "Photo names should be sequential (e.g. img001.jpg, img002.jpg)"
     }
 } 
