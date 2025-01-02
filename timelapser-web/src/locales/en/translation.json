@@ -1,0 +1,16 @@
+{
+    "title": "Create Timelapse Video",
+    "uploadText": "Please upload your photos:",
+    "uploadButton": "Upload Photos",
+    "darkMode": "Switch to Dark Mode",
+    "lightMode": "Switch to Light Mode",
+    "language": "Language",
+    "photosSelected": "{count} photos selected",
+    "validationErrors": {
+        "minPhotos": "Please upload at least {min} photos",
+        "maxPhotos": "You can upload maximum {max} photos",
+        "invalidType": "\"{filename}\" has unsupported file format. Only JPG and PNG formats are accepted",
+        "fileTooBig": "\"{filename}\" is too large. Maximum file size is 5MB",
+        "sequentialNames": "Photo names should be sequential (e.g. img001.jpg, img002.jpg)"
+    }
+} 

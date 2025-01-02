@@ -1,0 +1,16 @@
+{
+    "title": "Timelapse Video Oluştur",
+    "uploadText": "Lütfen fotoğraflarınızı yükleyin:",
+    "uploadButton": "Fotoğrafları Yükle",
+    "darkMode": "Karanlık Moda Geç",
+    "lightMode": "Aydınlık Moda Geç",
+    "language": "Dil",
+    "photosSelected": "{count} fotoğraf seçildi",
+    "validationErrors": {
+        "minPhotos": "En az {min} fotoğraf yüklemelisiniz",
+        "maxPhotos": "En fazla {max} fotoğraf yükleyebilirsiniz",
+        "invalidType": "\"{filename}\" desteklenmeyen bir dosya formatı. Sadece JPG ve PNG formatları kabul edilir",
+        "fileTooBig": "\"{filename}\" dosyası çok büyük. Maksimum dosya boyutu 5MB olmalıdır",
+        "sequentialNames": "Fotoğrafların isimleri sıralı olmalıdır (örn: img001.jpg, img002.jpg)"
+    }
+} 
