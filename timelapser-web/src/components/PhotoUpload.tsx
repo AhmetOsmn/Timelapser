@@ -1,8 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BiLoaderAlt } from 'react-icons/bi';
 import { FiX } from 'react-icons/fi';
 import { IoCloudUploadOutline } from 'react-icons/io5';
+import { apiService } from '../services/api.service';
+import useStore from '../store/useStore';
 
 interface ValidationError {
     message: string;
@@ -22,6 +24,16 @@ const PhotoUpload: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { t } = useTranslation();
+
+    // Video URL'ini temizle
+    useEffect(() => {
+        const { videoUrl } = useStore.getState();
+        return () => {
+            if (videoUrl) {
+                URL.revokeObjectURL(videoUrl);
+            }
+        };
+    }, []);
 
     const validatePhotos = async (files: File[]): Promise<ValidationError[]> => {
         const errors: ValidationError[] = [];
@@ -147,12 +159,33 @@ const PhotoUpload: React.FC = () => {
         validatePhotos(newPhotos).then(setErrors);
     };
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         if (errors.some(error => error.type === 'error')) {
             return;
         }
-        // Fotoğrafları işleme kodu buraya gelecek
+
+        const { setIsProcessing, setVideoUrl } = useStore.getState();
+        setIsProcessing(true);
+        setVideoUrl(null);
+
+        try {
+            const response = await apiService.createTimelapse(photos);
+            
+            if (response.error) {
+                console.error('Hata:', response.error);
+                return;
+            }
+
+            if (response.data) {
+                const videoUrl = URL.createObjectURL(response.data.videoBlob);
+                setVideoUrl(videoUrl);
+            }
+        } catch (error) {
+            console.error('Hata:', error);
+        } finally {
+            setIsProcessing(false);
+        }
     };
 
     return (
@@ -265,16 +298,40 @@ const PhotoUpload: React.FC = () => {
 
                 <button
                     type="submit"
-                    disabled={photos.length === 0 || errors.some(error => error.type === 'error') || isLoading}
+                    disabled={photos.length === 0 || errors.some(error => error.type === 'error') || isLoading || useStore.getState().isProcessing}
                     className={`w-full bg-blue-500 text-white p-3 rounded-lg font-medium hover:bg-blue-600 transition duration-200 ${
-                        (photos.length === 0 || errors.some(error => error.type === 'error') || isLoading)
+                        (photos.length === 0 || errors.some(error => error.type === 'error') || isLoading || useStore.getState().isProcessing)
                             ? 'opacity-50 cursor-not-allowed'
                             : ''
                     }`}
                 >
-                    {t('uploadButton')}
+                    {useStore.getState().isProcessing ? (
+                        <div className="flex items-center justify-center">
+                            <BiLoaderAlt className="w-5 h-5 animate-spin mr-2" />
+                            {t('processing')}
+                        </div>
+                    ) : (
+                        t('uploadButton')
+                    )}
                 </button>
             </form>
+
+            {/* Video Önizleme */}
+            {useStore.getState().videoUrl && (
+                <div className="mt-6 w-full">
+                    <h3 className="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300">
+                        {t('videoPreview')}
+                    </h3>
+                    <div className="relative pt-[56.25%] rounded-lg overflow-hidden bg-black">
+                        <video
+                            src={useStore.getState().videoUrl || undefined}
+                            className="absolute inset-0 w-full h-full"
+                            controls
+                            autoPlay
+                        />
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

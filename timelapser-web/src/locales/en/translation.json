@@ -6,6 +6,8 @@
     "lightMode": "Switch to Light Mode",
     "language": "Language",
     "photosSelected": "{{count}} photos selected",
+    "processing": "Creating video...",
+    "videoPreview": "Video Preview",
     "upload": {
         "dragDropText": "Drag and drop photos here or click to select",
         "formatText": "JPG or PNG format",

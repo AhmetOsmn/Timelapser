@@ -6,6 +6,10 @@ interface AppState {
     toggleDarkMode: () => void;
     language: string;
     toggleLanguage: () => void;
+    videoUrl: string | null;
+    setVideoUrl: (url: string | null) => void;
+    isProcessing: boolean;
+    setIsProcessing: (status: boolean) => void;
 }
 
 const useStore = create<AppState>((set) => ({
@@ -17,6 +21,10 @@ const useStore = create<AppState>((set) => ({
         i18n.changeLanguage(newLang);
         return { language: newLang };
     }),
+    videoUrl: null,
+    setVideoUrl: (url) => set({ videoUrl: url }),
+    isProcessing: false,
+    setIsProcessing: (status) => set({ isProcessing: status }),
 }));
 
 export default useStore; 

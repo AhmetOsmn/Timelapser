@@ -6,6 +6,8 @@
     "lightMode": "Aydınlık Moda Geç",
     "language": "Dil",
     "photosSelected": "{{count}} fotoğraf seçildi",
+    "processing": "Video oluşturuluyor...",
+    "videoPreview": "Video Önizleme",
     "upload": {
         "dragDropText": "Fotoğrafları sürükleyip bırakın veya seçmek için tıklayın",
         "formatText": "JPG veya PNG formatında",
